@@ -15,6 +15,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+
 app.get("/tasks", function (request, response) {
   // get all the tasks from the database
   connection.query("SELECT * FROM Task", function (err, data) {
@@ -25,6 +26,7 @@ app.get("/tasks", function (request, response) {
     }
   });
 });
+
 
 app.delete("/tasks/:taskId", function (request, response) {
   // delete the task with the given ID from the database
@@ -37,8 +39,8 @@ app.delete("/tasks/:taskId", function (request, response) {
       response.sendStatus(200);
     }
   })
-  
 })
+
 
 app.post("/tasks", function (request, response) {
   // create new task in the database
@@ -47,12 +49,21 @@ app.post("/tasks", function (request, response) {
   response.status(201).send(`Successfully created ${task.text}`)
 })
 
+
 app.put("/tasks/:taskId", function (request, response) {
   // update a task with the given ID from the database
+  // (need to consider which properties you are sending)
+  // {"taskText" "dateDue" "completed":}
   const taskId = request.params.taskId;
   const task = request.body;
-  // response.status(205).send(`Successfully updated task ${taskId} with "${task.text}"`);
-  response.status(205).send(`Successfully updated task ${taskId} with ${JSON.stringify(task)}`);
+  const q = "UPDATE Task SET taskText = ?, dateDue = ?, completed = ? WHERE taskId = ?";
+  connection.query(q, [task.taskText, task.dateDue, task.completed, taskId], function (err, data) {
+    if (err) {
+      response.status(500).json({error: err});
+    } else {
+      response.sendStatus(205);
+    }
+  })
 })
 
 module.exports.tasks = serverlessHttp(app); 
