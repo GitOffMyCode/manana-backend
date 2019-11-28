@@ -15,7 +15,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-
 app.get("/tasks", function (request, response) {
   // get all the tasks from the database
   connection.query("SELECT * FROM Task", function (err, data) {
@@ -26,7 +25,6 @@ app.get("/tasks", function (request, response) {
     }
   });
 });
-
 
 app.delete("/tasks/:taskId", function (request, response) {
   // delete the task with the given ID from the database
@@ -41,7 +39,6 @@ app.delete("/tasks/:taskId", function (request, response) {
   })
 })
 
-
 app.post("/tasks", function (request, response) {
   // create new task in the database
   const task = request.body;
@@ -55,7 +52,6 @@ app.post("/tasks", function (request, response) {
     }
   })
 })
-
 
 app.put("/tasks/:taskId", function (request, response) {
   // update a task with the given ID from the database
