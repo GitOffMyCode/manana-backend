@@ -45,17 +45,24 @@ app.delete("/tasks/:taskId", function (request, response) {
 app.post("/tasks", function (request, response) {
   // create new task in the database
   const task = request.body;
-  // {text: "do something", completed: false, dueDate: "2019-12-25"}
-  response.status(201).send(`Successfully created ${task.text}`)
+  // {values needed: taskText, dateDue, completed, userId}
+  const q = "INSERT INTO Task (taskText, dateDue, completed, userId) VALUES (?, ?, ?, ?)";
+  connection.query(q, [task.taskText, task.dateDue, task.completed, task.userId], function (err, data) {
+    if (err) {
+      response.status(500).json({error: err});
+    } else {
+      response.sendStatus(201);
+    }
+  })
 })
 
 
 app.put("/tasks/:taskId", function (request, response) {
   // update a task with the given ID from the database
-  // (need to consider which properties you are sending)
-  // {"taskText" "dateDue" "completed":}
   const taskId = request.params.taskId;
   const task = request.body;
+  // (need to consider which properties you are sending - all?)
+  // {values needed: taskText, dateDue, completed}
   const q = "UPDATE Task SET taskText = ?, dateDue = ?, completed = ? WHERE taskId = ?";
   connection.query(q, [task.taskText, task.dateDue, task.completed, taskId], function (err, data) {
     if (err) {
