@@ -11,6 +11,9 @@ const connection = mysql.createConnection({
   database: "Manana"
 })
 
+// handler.js - lambda function (serverless) - connects API to database
+// if changed needs to be redeployed "serverless deploy"
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -24,7 +27,7 @@ app.get("/tasks", function (request, response) {
       response.status(200).json(data);
     }
   });
-});
+})
 
 app.delete("/tasks/:taskId", function (request, response) {
   // delete the task with the given ID from the database
@@ -36,35 +39,33 @@ app.delete("/tasks/:taskId", function (request, response) {
     } else {
       response.sendStatus(200);
     }
-  })
+  });
 })
 
 app.post("/tasks", function (request, response) {
   // create new task in the database
   const task = request.body;
-  // {values needed: taskText, dateDue, completed, userId}
-  const q = "INSERT INTO Task (taskText, dateDue, completed, userId) VALUES (?, ?, ?, ?)";
-  connection.query(q, [task.taskText, task.dateDue, task.completed, task.userId], function (err, data) {
+  task.completed = false;
+  const q = "INSERT INTO Task SET ?";
+  connection.query(q, task, function (err, data) {
     if (err) {
       response.status(500).json({error: err});
     } else {
-      response.sendStatus(201);
+      task.taskId = data.insertId;
+      response.status(201).json(task);
     }
-  })
+  });
 })
 
 app.put("/tasks/:taskId", function (request, response) {
   // update a task with the given ID from the database
   const taskId = request.params.taskId;
-  const task = request.body;
-  // (need to consider which properties you are sending - all?)
-  // {values needed: taskText, dateDue, completed}
-  const q = "UPDATE Task SET taskText = ?, dateDue = ?, completed = ? WHERE taskId = ?";
-  connection.query(q, [task.taskText, task.dateDue, task.completed, taskId], function (err, data) {
+  const q = "UPDATE Task SET completed = true WHERE taskId = ?";   
+  connection.query(q, [taskId], function (err, data) {
     if (err) {
       response.status(500).json({error: err});
     } else {
-      response.sendStatus(205);
+      response.status(200).json({message: "Task Updated" });
     }
   })
 })
