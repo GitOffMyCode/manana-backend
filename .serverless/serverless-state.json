@@ -159,7 +159,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/manana-backend/dev/1576933153340-2019-12-21T12:59:13.340Z/manana-backend.zip"
+                "S3Key": "serverless/manana-backend/dev/1576957186906-2019-12-21T19:39:46.906Z/manana-backend.zip"
               },
               "FunctionName": "manana-backend-dev-tasks",
               "Handler": "handler.tasks",
@@ -185,14 +185,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "TasksLambdaVersion0580UBUAWjR9U24MPLpB9GYQBc6Ap8HKzCYmwZtw": {
+          "TasksLambdaVersionwXxRJsrnCUVu4X3xv3OaO9bLJ1eAw88MJzyz1FlsFmA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "TasksLambdaFunction"
               },
-              "CodeSha256": "+Mr3AkODmGZvWFG2ET+nTIEA/Tl2vu+hKWZ5+O9nLpE="
+              "CodeSha256": "L107JVv84sfOMM8pm8FVGOV1vZL26V1xijEI5cvcXko="
             }
           },
           "ApiGatewayRestApi": {
@@ -499,7 +499,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1576933146388": {
+          "ApiGatewayDeployment1576957181055": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -563,7 +563,7 @@
           "TasksLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "TasksLambdaVersion0580UBUAWjR9U24MPLpB9GYQBc6Ap8HKzCYmwZtw"
+              "Ref": "TasksLambdaVersionwXxRJsrnCUVu4X3xv3OaO9bLJ1eAw88MJzyz1FlsFmA"
             }
           },
           "ServiceEndpoint": {
@@ -788,7 +788,7 @@
     "artifact": "/Users/user/Developer/TechReturners/manana-backend/.serverless/manana-backend.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/manana-backend/dev/1576933153340-2019-12-21T12:59:13.340Z",
+    "artifactDirectoryName": "serverless/manana-backend/dev/1576957186906-2019-12-21T19:39:46.906Z",
     "artifact": "manana-backend.zip"
   }
 }

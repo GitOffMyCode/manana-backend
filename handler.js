@@ -3,6 +3,7 @@ const serverlessHttp = require("serverless-http");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
+const process = require('process');
 
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -32,13 +33,11 @@ app.get("/tasks", (request, response) => {
 app.post("/tasks", (request, response) => {
   // create new task in the database
   const task = request.body;
-  task.completed = false; // do I need this - look at front end!
   const q = "INSERT INTO Task SET ?";
-  connection.query(q, task, function (err, data) {
+  connection.query(q, task, err => {
     if (err) {
       response.status(500).json({error: err});
     } else {
-      task.taskId = data.insertId;
       response.status(201).json(task);
     }
   });
