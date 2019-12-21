@@ -145,7 +145,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/manana-backend/dev/1576957186906-2019-12-21T19:39:46.906Z/manana-backend.zip"
+          "S3Key": "serverless/manana-backend/dev/1576958077560-2019-12-21T19:54:37.560Z/manana-backend.zip"
         },
         "FunctionName": "manana-backend-dev-tasks",
         "Handler": "handler.tasks",
@@ -171,14 +171,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "TasksLambdaVersionwXxRJsrnCUVu4X3xv3OaO9bLJ1eAw88MJzyz1FlsFmA": {
+    "TasksLambdaVersion4SfrWu0XwFdCdXEXI7EiDB1cB94TTB0rbYzbtYObFM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "TasksLambdaFunction"
         },
-        "CodeSha256": "L107JVv84sfOMM8pm8FVGOV1vZL26V1xijEI5cvcXko="
+        "CodeSha256": "nFGpfmEQ2u8gjzF+xcjHIwHIuSbqRNO4vsWPUhoKnkY="
       }
     },
     "ApiGatewayRestApi": {
@@ -485,7 +485,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1576957181055": {
+    "ApiGatewayDeployment1576958071372": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -549,7 +549,7 @@
     "TasksLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "TasksLambdaVersionwXxRJsrnCUVu4X3xv3OaO9bLJ1eAw88MJzyz1FlsFmA"
+        "Ref": "TasksLambdaVersion4SfrWu0XwFdCdXEXI7EiDB1cB94TTB0rbYzbtYObFM"
       }
     },
     "ServiceEndpoint": {
