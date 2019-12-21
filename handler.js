@@ -18,7 +18,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get("/tasks", function (request, response) {
+app.get("/tasks", (request, response) => {
   // get all the tasks from the database
   connection.query("SELECT * FROM Task", function (err, data) {
     if (err) {
@@ -29,7 +29,22 @@ app.get("/tasks", function (request, response) {
   });
 })
 
-app.delete("/tasks/:taskId", function (request, response) {
+app.post("/tasks", (request, response) => {
+  // create new task in the database
+  const task = request.body;
+  task.completed = false; // do I need this - look at front end!
+  const q = "INSERT INTO Task SET ?";
+  connection.query(q, task, function (err, data) {
+    if (err) {
+      response.status(500).json({error: err});
+    } else {
+      task.taskId = data.insertId;
+      response.status(201).json(task);
+    }
+  });
+})
+
+app.delete("/tasks/:taskId", (request, response) => {
   // delete the task with the given ID from the database
   const taskId = request.params.taskId;
   // Escape user-provided values (sql injection attack)
@@ -42,26 +57,11 @@ app.delete("/tasks/:taskId", function (request, response) {
   });
 })
 
-app.post("/tasks", function (request, response) {
-  // create new task in the database
-  const task = request.body;
-  task.completed = false;
-  const q = "INSERT INTO Task SET ?";
-  connection.query(q, task, function (err, data) {
-    if (err) {
-      response.status(500).json({error: err});
-    } else {
-      task.taskId = data.insertId;
-      response.status(201).json(task);
-    }
-  });
-})
-
-app.put("/tasks/:taskId", function (request, response) {
+app.put("/tasks/:taskId", (request, response) => {
   // update a task with the given ID from the database
   const taskId = request.params.taskId;
   const q = "UPDATE Task SET completed = true WHERE taskId = ?";   
-  connection.query(q, [taskId], function (err, data) {
+  connection.query(q, [taskId], function (err) {
     if (err) {
       response.status(500).json({error: err});
     } else {
