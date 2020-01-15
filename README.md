@@ -2,7 +2,7 @@
 
 This is the back end API of a Todo Application, built throughout the [Tech Returners](https://techreturners.com) Your Journey Into Tech course. It is consumed by a front end React application, available [here](https://github.com/GitOffMyCode/manana-react) and connects to an RDS Database.
 
-<!-- The hosted version of the application is available here: [https://github.com/whatever-link-here](https://github.com/whatever-link-here). -->
+The hosted version of the application is available here: [https://gitoffmycode.github.io/manana-react/](https://gitoffmycode.github.io/manana-react/)
 
 ### Technology Used
 
@@ -25,7 +25,7 @@ The API exposes the following endpoints:
 
 ##### GET /tasks
 
-[https://0jjep9sqze.execute-api.eu-west-1.amazonaws.com/dev/tasks](https://0jjep9sqze.execute-api.eu-west-1.amazonaws.com/dev/tasks)
+[https://ewli15zf1g.execute-api.eu-west-1.amazonaws.com/dev/tasks](https://ewli15zf1g.execute-api.eu-west-1.amazonaws.com/dev/tasks)
 
 Responds with JSON containing all tasks in the Database.
 
@@ -33,15 +33,15 @@ Responds with JSON containing all tasks in the Database.
 
 ##### POST /tasks
 
-[https://0jjep9sqze.execute-api.eu-west-1.amazonaws.com/dev/tasks](https://0jjep9sqze.execute-api.eu-west-1.amazonaws.com/dev/tasks)
+[https://ewli15zf1g.execute-api.eu-west-1.amazonaws.com/dev/tasks](https://ewli15zf1g.execute-api.eu-west-1.amazonaws.com/dev/tasks)
 
 Will create a new task when sent a JSON payload in the format:
 
 ```json
 {
-  "text": "walk dog",
-  "completed": false,
-  "date": "2019-12-17"
+  "taskText": "clean the fish tank",
+  "dateDue": "2019-12-20",
+  "completed": false
 }
 ```
 
@@ -49,7 +49,7 @@ Will create a new task when sent a JSON payload in the format:
 
 ##### DELETE /tasks/:taskId
 
-[https://0jjep9sqze.execute-api.eu-west-1.amazonaws.com/dev/tasks/:taskId](https://0jjep9sqze.execute-api.eu-west-1.amazonaws.com/dev/tasks/:taskId)
+[https://ewli15zf1g.execute-api.eu-west-1.amazonaws.com/dev/tasks/:taskId](https://ewli15zf1g.execute-api.eu-west-1.amazonaws.com/dev/tasks/:taskId)
 
 Deletes the task of the given ID.
 
@@ -57,14 +57,14 @@ Deletes the task of the given ID.
 
 ##### PUT /tasks/:taskId
 
-[https://0jjep9sqze.execute-api.eu-west-1.amazonaws.com/dev/tasks/:taskId](https://0jjep9sqze.execute-api.eu-west-1.amazonaws.com/dev/tasks/:taskId)
+[https://ewli15zf1g.execute-api.eu-west-1.amazonaws.com/dev/tasks/:taskId](https://ewli15zf1g.execute-api.eu-west-1.amazonaws.com/dev/tasks/:taskId)
 
 Will update a task when sent a JSON payload in the format:
 
 ```json
 {
-  "text": "walk dog",
-  "completed": true,
-  "date": "2019-12-17"
+  "taskText": "clean the fish tank",
+  "dateDue": "2019-12-20",
+  "completed": true
 }
 ```
